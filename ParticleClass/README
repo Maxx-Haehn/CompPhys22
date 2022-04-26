@@ -1,0 +1,4 @@
+Create a directory. Put MakeFile into the directory. Create a bin directory and an src directory. Put particle.h, particle.cpp,
+and particleTest.cpp into src directory. The executable name is particleTest.
+
+The class is atill a work in progress. Let me know of any suggestions you may have.
