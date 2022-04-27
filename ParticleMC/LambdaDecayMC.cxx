@@ -49,8 +49,6 @@ int main( ){
 
     EnergyandMomentum << std::setprecision(3) <<PartMatrix->GetValue(0,0)<<"	"<<PartMatrix->GetValue(0,1)<<"	"<<PartMatrix->GetValue(1,0)<<"	"
     <<PartMatrix->GetValue(1,1)<<"	"<<PartMatrix->GetValue(2,0)<<"	"<<PartMatrix->GetValue(2,1)<< endl;
-    
-    cout << i << "\r";
 
   }
 
