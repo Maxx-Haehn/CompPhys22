@@ -1,0 +1,11 @@
+I created a ParticleSystem class that stores the lambda, proton, and pion as a system. Then the member function ParticleDecay can be used to apply the MC
+simulation created by Daniel. The DecayTest code shows this working. I did not set the seed in the code, so it may bring up the same result if it is used
+multiple times. If it does, the seed just needs to be set with time(NULL).
+
+The MakeFile will make the DecayTest executable and put it into the bin directory. All the source code must go into the src directory.
+
+The print function is used shows the lorentz vector and name of the particle. It will write the lorentz vector as (x,y,z,t) = (...), but this is the momen-
+tum four vector. I used the TLorentzVector print function for my print function, so thats why its the way it is. It also prints a (p,eta,phi,E) four vector
+but I'm not sure if that applies to the way I implemented the Lorentz vector.
+
+The particle angles and energy can also be accessed after applying the PartileDecay function.
