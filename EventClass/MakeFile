@@ -1,0 +1,53 @@
+######################
+
+CXX           = g++
+LD            = g++
+
+#############################
+
+os = $(shell uname -s)
+
+INSTALL_DIR=/opt/local
+GSL=$(INSTALL_DIR)
+
+ifeq ($(os),Linux)
+CXXFLAGS      = -O -Wall
+else
+CXXFLAGS      = -O -fPIC -pipe -Wall
+endif
+
+CXXFLAGSGSL = $(CXXFLAGS)
+CXXFLAGSGSL += -I$(GSL)/include
+CXXFLAGSROOT = -I$(ROOTSYS)/include
+
+ifeq ($(os),Linux)
+LDFLAGS       = -O -g
+LDFLAGSS      = -g --shared
+else
+LDFLAGS       = -O -Xlinker -bind_at_load -flat_namespace
+LDFLAGSS      = -dynamiclib -flat_namespace -undefined suppress
+LDFLAGSSS     = -bundle
+endif
+
+ROOTLIBS      = $(shell root-config --libs)
+
+LIBSROOT       = $(ROOTLIBS)
+LIBSGSL	       = $(LIBS)
+LIBSGSL       += -L$(GSL)/lib -lgsl -lgslcblas
+
+
+DecayTest :
+	g++ $(CXXFLAGSROOT) -c src/particle.cpp src/ParticleSystem.cpp src/DecayTest.cpp
+	g++ $(LDFLAGS) particle.o ParticleSystem.o DecayTest.o $(LIBSROOT) -o bin/DecayTest
+	rm *.o
+
+EventTest :
+	g++ $(CXXFLAGSROOT) -c src/particle.cpp src/ParticleSystem.cpp src/event.cpp src/EventTest.cpp
+	g++ $(LDFLAGS) particle.o event.o ParticleSystem.o EventTest.o $(LIBSROOT) -o bin/EventTest
+	rm *.o
+
+clean :
+	rm -f *.o 
+	@echo "All cleaned-up :-)"
+
+# DO NOT DELETE
