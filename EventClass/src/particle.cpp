@@ -8,8 +8,6 @@ Particle class implementation.
 #include"particle.h"
 #include<cmath>
 
-//ClassImp(particle) <-------------------Will be needed to implement as ROOT Class
-
 //Constructors:
 
 particle::particle() 									//Default constructor: No Name and Zero lorentz vector.
