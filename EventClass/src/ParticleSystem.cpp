@@ -11,46 +11,41 @@ Implementation of ParticleSystem class.
 
 using namespace std;
 
-void ParticleSystem::Test(double x)
-{
-	daughter_particle2->SetX4(x);
-}
-
 //Constructors:
 ParticleSystem::ParticleSystem() //Default: Lorentz vectors will all be zero and the particles will have default name.
 {
-	parent_particle->SetName("Parent");
-	daughter_particle1->SetName("Daughter1");
-	daughter_particle2->SetName("Daughter2");
+	parent_particle.SetName("Parent");
+	daughter_particle1.SetName("Daughter1");
+	daughter_particle2.SetName("Daughter2");
 }
 
 ParticleSystem::ParticleSystem(particle& parent, particle& daughter1, particle& daughter2)
 {
-	parent_particle = &parent;
-	daughter_particle1 = &daughter1;
-	daughter_particle2 = &daughter2;
+	parent_particle = parent;
+	daughter_particle1 = daughter1;
+	daughter_particle2 = daughter2;
 }
 
 //Deconstructor:
 ParticleSystem::~ParticleSystem()
 {
-	std::cout<<"ParticleSystem: Deconstructor Called"<<std::endl;
+	//std::cout<<"ParticleSystem: Deconstructor Called"<<std::endl;
 }
 
 //Setters:
 void ParticleSystem::SetParentParticle(particle& parent)
 {
-	parent_particle = &parent;
+	parent_particle = parent;
 }
 
 void ParticleSystem::SetDaughterParticle1(particle& daughter1)
 {
-	daughter_particle1 = &daughter1;
+	daughter_particle1 = daughter1;
 }
 
 void ParticleSystem::SetDaughterParticle2(particle& daughter2)
 {
-	daughter_particle2 = &daughter2;
+	daughter_particle2 = daughter2;
 }
 
 //Getters: Defined inline.
@@ -59,22 +54,23 @@ void ParticleSystem::SetDaughterParticle2(particle& daughter2)
 void ParticleSystem::Print()
 {
 	std::cout<<"Parent Particle:";
-	parent_particle->Print();
-	std::cout<<std::endl;
+	parent_particle.Print();
+	//std::cout<<std::endl;
 
 	std::cout<<"Daughter Particle One:";
-	daughter_particle1->Print();
-	std::cout<<std::endl;
+	daughter_particle1.Print();
+	//std::cout<<std::endl;
 
 	std::cout<<"Daughter Particle Two:";
-	daughter_particle2->Print();
-	std::cout<<std::endl;
+	daughter_particle2.Print();
+	//std::cout<<std::endl;
 }
 
 void ParticleSystem::ParticleDecay(double initial_parent_momentum) //MC function for system of particles.
 {
 //	matrixNd *ParticleM=new matrixNd(3,7); // Matrix that will store all the particles data
 
+	srand(time(NULL));
 	double Pl = initial_parent_momentum;
 
 	//Left these values as they are, though we could, technically, use the particle class data to set them for each particle.
@@ -248,31 +244,31 @@ void ParticleSystem::ParticleDecay(double initial_parent_momentum) //MC function
   	}while(true);
 
   	// Save all the important values of every particle in the Matrix
-  	parent_particle->SetX4(El);			//ParticleM->SetValue(0,0,El);
+  	parent_particle.SetX4(El);			//ParticleM->SetValue(0,0,El);
   	//ParticleM->SetValue(0,1,Pl);
-  	parent_particle->SetX1(Plx);			//ParticleM->SetValue(0,2,Plx);
-  	parent_particle->SetX2(Ply);			//ParticleM->SetValue(0,3,Ply);
-  	parent_particle->SetX3(Plz);			//ParticleM->SetValue(0,4,Plz);
-  	parent_particle->SetTheta(thetal);	//ParticleM->SetValue(0,5,thetal);
-  	parent_particle->SetPhi(phil);		//ParticleM->SetValue(0,6,phil);
+  	parent_particle.SetX1(Plx);			//ParticleM->SetValue(0,2,Plx);
+  	parent_particle.SetX2(Ply);			//ParticleM->SetValue(0,3,Ply);
+  	parent_particle.SetX3(Plz);			//ParticleM->SetValue(0,4,Plz);
+  	parent_particle.SetTheta(thetal);	//ParticleM->SetValue(0,5,thetal);
+  	parent_particle.SetPhi(phil);		//ParticleM->SetValue(0,6,phil);
 
   	//First daughter particle (proton in our case)
-  	daughter_particle1->SetX4(Ep);		//ParticleM->SetValue(1,0,Ep);
+  	daughter_particle1.SetX4(Ep);		//ParticleM->SetValue(1,0,Ep);
   	//ParticleM->SetValue(1,1,Pp);
-  	daughter_particle1->SetX1(Ppx);		//ParticleM->SetValue(1,2,Ppx);
-  	daughter_particle1->SetX2(Ppy);		//ParticleM->SetValue(1,3,Ppy);
-  	daughter_particle1->SetX3(Ppz);		//ParticleM->SetValue(1,4,Ppz);
-  	daughter_particle1->SetTheta(thetap);//ParticleM->SetValue(1,5,thetap);
-  	daughter_particle1->SetPhi(phip);	//ParticleM->SetValue(1,6,phip);
+  	daughter_particle1.SetX1(Ppx);		//ParticleM->SetValue(1,2,Ppx);
+  	daughter_particle1.SetX2(Ppy);		//ParticleM->SetValue(1,3,Ppy);
+  	daughter_particle1.SetX3(Ppz);		//ParticleM->SetValue(1,4,Ppz);
+  	daughter_particle1.SetTheta(thetap);//ParticleM->SetValue(1,5,thetap);
+  	daughter_particle1.SetPhi(phip);	//ParticleM->SetValue(1,6,phip);
 
   	//Second daughter particle (pion in our case)
-  	daughter_particle2->SetX4(Epi);		//ParticleM->SetValue(2,0,Epi);
+  	daughter_particle2.SetX4(Epi);		//ParticleM->SetValue(2,0,Epi);
   	//ParticleM->SetValue(2,1,Ppi);
-  	daughter_particle2->SetX1(Ppix);		//ParticleM->SetValue(2,2,Ppix);
-  	daughter_particle2->SetX2(Ppiy);		//ParticleM->SetValue(2,3,Ppiy);
-  	daughter_particle2->SetX3(Ppiz);		//ParticleM->SetValue(2,4,Ppiz);
-  	daughter_particle2->SetTheta(thetapi);//ParticleM->SetValue(2,5,thetapi);
-  	daughter_particle2->SetPhi(phipi);	//ParticleM->SetValue(2,6,phipi);
+  	daughter_particle2.SetX1(Ppix);		//ParticleM->SetValue(2,2,Ppix);
+  	daughter_particle2.SetX2(Ppiy);		//ParticleM->SetValue(2,3,Ppiy);
+  	daughter_particle2.SetX3(Ppiz);		//ParticleM->SetValue(2,4,Ppiz);
+  	daughter_particle2.SetTheta(thetapi);//ParticleM->SetValue(2,5,thetapi);
+  	daughter_particle2.SetPhi(phipi);	//ParticleM->SetValue(2,6,phipi);
 
   	// Return the Particle Matrix
   	//return ParticleM;

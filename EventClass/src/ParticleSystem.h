@@ -15,12 +15,12 @@ Class for the particle system.
 #include<iostream>
 #include"particle.h"
 
-class ParticleSystem : public particle
+class ParticleSystem : public TObject
 {
-private:
-	particle* parent_particle;
-	particle* daughter_particle1;
-	particle* daughter_particle2;
+protected:
+	particle parent_particle;			//Particles
+	particle daughter_particle1;
+	particle daughter_particle2;
 
 public:
 	//Constructors:
@@ -37,9 +37,9 @@ public:
 	void Test(double x);
 
 	//Getters:
-	particle GetParentParticle() {return* parent_particle;}
-	particle GetDaughterParticle1() {return* daughter_particle1;}
-	particle GetDaughterParticle2() {return* daughter_particle2;}
+	particle GetParentParticle() {return parent_particle;}
+	particle GetDaughterParticle1() {return daughter_particle1;}
+	particle GetDaughterParticle2() {return daughter_particle2;}
 
 	//Member Functions:
 	virtual void Print();

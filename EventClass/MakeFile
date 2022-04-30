@@ -41,6 +41,11 @@ DecayTest :
 	g++ $(LDFLAGS) particle.o ParticleSystem.o DecayTest.o $(LIBSROOT) -o bin/DecayTest
 	rm *.o
 
+EventTest :
+	g++ $(CXXFLAGSROOT) -c src/particle.cpp src/ParticleSystem.cpp src/event.cpp src/EventTest.cpp
+	g++ $(LDFLAGS) particle.o event.o ParticleSystem.o EventTest.o $(LIBSROOT) -o bin/EventTest
+	rm *.o
+
 clean :
 	rm -f *.o 
 	@echo "All cleaned-up :-)"

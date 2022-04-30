@@ -8,8 +8,6 @@ Particle class implementation.
 #include"particle.h"
 #include<cmath>
 
-//ClassImp(particle) <-------------------Will be needed to implement as ROOT Class
-
 //Constructors:
 
 particle::particle() 									//Default constructor: No Name and Zero lorentz vector.
@@ -41,7 +39,7 @@ particle::particle(std::string name, double x, double y, double z, double t)
 
 particle::~particle()
 {
-	std::cout<<"particle: Deconstructor Called!"<<std::endl;
+	//std::cout<<"particle: Deconstructor Called!"<<std::endl;
 }
 
 //Operators:
@@ -153,10 +151,10 @@ double particle::GetTheta()					//Returns the polar angle.
 //Member Functions:
 void particle::Print()						//Prints name of the particle and the Lorentz vector of the particle
 {
-	std::cout<<std::endl;
-	std::cout<<"Particle Name: "<<particle_name<<std::endl;
-	particle_LVec.Print();					//USing the TLorentzVector class print function.
-	std::cout<<std::endl;
+	//std::cout<<std::endl;
+	std::cout<<"Particle Name = "<<particle_name<<"; Lorentz Vector = ("<<GetX1()<<", "<<GetX2()<<", "<<GetX3()<<", "<<GetX4()<<")"<<std::endl;
+	//particle_LVec.Print();					//USing the TLorentzVector class print function.
+	//std::cout<<std::endl;
 }
 
 void LorentzView(TLorentzVector*& LVecPtr, particle& p)

@@ -1,0 +1,6 @@
+In the EventTest code, a TFile is created with a TTree. The code only makes one event with 50 tracks. The tracks are just the system with the information
+of the three particles. The information of each track can then be accessed to do the analysis.
+
+I've been having trouble getting the classes to work in the ROOT interpreter. They work fine when compiled with the MakeFile through g++, but whenever I try
+to compile the ParticleSystem class in the ROOT interpreter, I get errors. Because of this, the analysis may have to be done in a .cpp file instead of a .C
+file.

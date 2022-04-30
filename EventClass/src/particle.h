@@ -62,9 +62,6 @@ class particle : public TObject
 		//Member Functions:
 		virtual void Print(); //Will print out name and Lorentz vector.
 		friend void LorentzView(TLorentzVector*& LVecPtr, particle& p);
-		
-	//ClassDef(particle,1) <--------------------------------------------Will be needed to implement as ROOT class.
-
 };
 
 #endif //ROOT_particle
