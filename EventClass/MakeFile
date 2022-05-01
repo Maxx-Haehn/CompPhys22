@@ -46,6 +46,11 @@ EventTest :
 	g++ $(LDFLAGS) particle.o event.o ParticleSystem.o EventTest.o $(LIBSROOT) -o bin/EventTest
 	rm *.o
 
+Analysis :
+	g++ $(CXXFLAGSROOT) -c src/particle.cpp src/ParticleSystem.cpp src/event.cpp src/Analysis.cpp
+	g++ $(LDFLAGS) particle.o event.o ParticleSystem.o Analysis.o $(LIBSROOT) -o bin/Analysis
+	rm *.o
+
 clean :
 	rm -f *.o 
 	@echo "All cleaned-up :-)"
