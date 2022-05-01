@@ -1,7 +1,7 @@
 /*
 Darius Rushaj
 
-Test code for event class and TTree creation
+Test code for event class
 */
 
 #include"TROOT.h"
@@ -10,32 +10,37 @@ Test code for event class and TTree creation
 #include"event.h"
 #include"particle.h"
 #include"ParticleSystem.h"
+#include "ctime"
 
 int main()
 {
-	event* ev = new event(0);
-	particle Lambda("Lambda"), Proton("Proton"), Pion("Pion");
+	TFile f("EventTest.root","recreate");
+	TTree T("TreeName","Particle Decay Tree");
 
-	TFile* f = new TFile("EventTest.Root","recreate");
-	TTree* t1 = new TTree("event","Particle Decay Tree");
+	event ev(0);
+	T.Branch("EventBranchName", &ev);
 
-	t1->Branch("Event", &ev);
+	srand(time(NULL));	
 
-	for (int i = 0; i < 50; ++i)
+	for (int i = 0; i < 2; ++i)
 	{
-		ParticleSystem* System = new ParticleSystem(Lambda, Proton, Pion); //Deleting these after causes a crash.
-		System->ParticleDecay(5);
-		ev->AddSystem(System);
-		//System->Print();
-		std::cout<<"Progress: "<<(double) (i+1)/(50.0)*100.0<<"% "<<std::endl;
+		particle Lambda("Lambda"), Proton("Proton"), Pion("Pion");
+		ParticleSystem* LambdaSystem = new ParticleSystem(Lambda, Proton, Pion);
+		LambdaSystem->ParticleDecay(5);
+		ev.AddSystem(LambdaSystem);
+		//std::cout<<"Progress: "<<(i+1)*2<<"%"<<std::endl;
 	}
 
-	t1->Fill();
-	delete ev;
+	for (int i = 0; i < 2; ++i)
+	{
+		ev.GetTrack(i)->Print();
+	}
 
-	t1->Write();
-	f->Write();
-	f->Close();
+	T.Fill();
+	f.cd();
+	T.Write();
+	T.Print();
+	f.Close();
 
 	return 0;
 }
